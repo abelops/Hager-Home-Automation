@@ -18,6 +18,19 @@ public class ContCent {
     DesignUtils headerDesigner = new DesignUtils();
     JButton back = new JButton();
 
+       // Button Icons 
+    ImageIcon funimg = new ImageIcon(getClass().getResource("power-on-off-8-240.png"));
+    JLabel funlabel = new JLabel("",funimg,JLabel.CENTER);
+    
+
+    ImageIcon Lightimg = new ImageIcon(getClass().getResource("light-bulb-15-240.png"));
+    JLabel lightlabel = new JLabel("",Lightimg,JLabel.CENTER);
+    
+
+    ImageIcon doorimg = new ImageIcon(getClass().getResource("door-3-240.png"));
+    JLabel dorrlabel = new JLabel("",doorimg,JLabel.CENTER);
+    
+
     public ContCent() {
         Home.frame.add(contPanelWindow);
         Home.frame.add(headerpanel);
@@ -31,16 +44,24 @@ public class ContCent {
         
         // Button configs
         light.setText("Light-1");
-        light.setBounds(50, 30, 300, 30);
+        light.setBounds(330, 10, 130, 130);
+        lightlabel.setBounds(0,0,30,30);
+        light.add(lightlabel);
 
         light2.setText("Light-2");
-        light2.setBounds(400, 30, 300, 30);
+        light2.setBounds(600, 10, 130, 130);
+        lightlabel.setBounds(0,0,30,30);
+        light2.add(lightlabel);
 
         fan.setText("Fan");
-        fan.setBounds(750, 30, 300, 30);
+        fan.setBounds(330, 150, 130, 130);
+        funlabel.setBounds(0,0,30,30);
+        fan.add(funlabel);
 
         door.setText("Door");
-        door.setBounds(50, 100, 300, 30);
+        door.setBounds(600, 150, 130, 130);
+        dorrlabel.setBounds(0,0,30,30);
+        door.add(dorrlabel);
 
 
         back.setText("Go Back");
