@@ -95,12 +95,12 @@ public class Login {
     }
 
     void welcomeMsg() {
-        JOptionPane.showMessageDialog(loginPanel, "You have successfully logged in", "Login Confirmation",
+        JOptionPane.showMessageDialog(Home.frame, "You have successfully logged in", "Login Confirmation",
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
     void notAllowedMsg() {
-        JOptionPane.showMessageDialog(loginPanel, "Incorrect login or password. Try again", "Error",
+        JOptionPane.showMessageDialog(Home.frame, "Incorrect login or password. Try again", "Error",
                 JOptionPane.ERROR_MESSAGE);
     }
 
@@ -178,10 +178,6 @@ public class Login {
                     if (username.length() == 0 || password.length() == 0) {
                         if (username.length() == 0 && password.length() == 0) {
                             errorMsg.setText("Both Fields cannot be empty");
-                            errorMsg.setForeground(Color.RED);
-                            errorMsg.setToolTipText("Fields should be filled with correct infos");
-                            loginPanel.repaint();
-
                             int delay = 4000; // milliseconds
                             ActionListener taskPerformer = new ActionListener() {
                                 @Override
@@ -195,7 +191,6 @@ public class Login {
                             errorMsg.setForeground(Color.RED);
                             errorMsg.setToolTipText("Fields should be filled with correct infos");
                             loginPanel.repaint();
-
                             int delay = 4000; // milliseconds
                             ActionListener taskPerformer = new ActionListener() {
                                 @Override
