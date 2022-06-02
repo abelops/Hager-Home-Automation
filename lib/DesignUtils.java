@@ -23,7 +23,7 @@ public class DesignUtils {
     public void headerCreator(String string, JLabel headerLabel, JPanel headerpanel) {
         headerpanel.setVisible(true);
         headerpanel.setBackground(mainColor);
-        headerpanel.setBounds(0, 0, 1100, 200);
+        headerpanel.setBounds(0, 0, 1700, 200);
         // header label
         headerLabel.setText(string);
         headerLabel.setForeground(Color.white);

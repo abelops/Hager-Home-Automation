@@ -27,7 +27,7 @@ public class Home extends JFrame {
     
 
     // JPanel imagePanel = new JPanel();
-    ImageIcon image = new ImageIcon(getClass().getResource("backgroundNew.jpg"));
+    ImageIcon image = new ImageIcon(getClass().getResource("bgs.png"));
     JLabel labelpic = new JLabel("",image,JLabel.CENTER);
     
     public static DesignUtils designer = new DesignUtils(); // Static object which will be used in other classes too
@@ -84,8 +84,7 @@ public class Home extends JFrame {
     // }
 
     void imgAdder(){
-
-        labelpic.setBounds(0,0,600,800);
+        labelpic.setBounds(-50,-100,590,800);
     }
 
     void loginConfig() {

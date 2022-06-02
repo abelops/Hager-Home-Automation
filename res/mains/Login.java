@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 import lib.DesignUtils;
-
+import java.sql.*;
 public class Login {
     JPanel loginPanel = new JPanel();
     JButton submit = new JButton();
@@ -50,11 +50,13 @@ public class Login {
         submit.setText("Submit");
         submit.setBounds(10, 295, 120, 40);
         Home.designer.BtnFontDesigner(submit);
+        Home.designer.defBtnColor(submit);
 
         // Back Button
         back.setText("Home");
         back.setBounds(140, 295, 120, 40);
         Home.designer.BtnFontDesigner(back);
+        Home.designer.defBtnColor(back);
 
         //Header 
         headerConfig();
@@ -156,74 +158,43 @@ public class Login {
         registeredPasswords.add("1234");
         registeredPasswords.add("1234"); 
 
-
-        for (int i = 0; i < Database.registeredUsernames.length; i++) {
-            if (username.equals(Database.registeredUsernames[i]) && password.equals(Database.registeredPasswords[i])) {
-                welcomeMsg();
-                Home.frame.getContentPane().removeAll();
-                Home.frame.repaint();
-                //Console log:
-                System.out.println("Authentication Successful\n\n");
-                new ContCent(); // creating the control center
-                Home.frame.validate();
-                break;
-            } else if (!(username.equals(Database.registeredUsernames[i]) && password.equals(Database.registeredPasswords[i]))) {
-                if (username.equals(Database.registeredUsernames[i]) && !password.equals(Database.registeredPasswords[i])) {
-                    JOptionPane.showMessageDialog(Home.frame, "Wrong Password ! Please recheck your Password");
-                } else if (!username.equals(Database.registeredUsernames[i])
-                        && password.equals(Database.registeredPasswords[i])) {
-                    JOptionPane.showMessageDialog(Home.frame, "Wrong Username ! Please recheck your Username");
-                } else if (!(username.equals(Database.registeredUsernames[i]))
-                        && !(password.equals(Database.registeredPasswords[i]))) {
-                    if (username.length() == 0 || password.length() == 0) {
-                        if (username.length() == 0 && password.length() == 0) {
-                            errorMsg.setText("Both Fields cannot be empty");
-                            int delay = 4000; // milliseconds
-                            ActionListener taskPerformer = new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent evt) {
-                                    errorMsg.setVisible(false);
-                                }
-                            };
-                            new javax.swing.Timer(delay, taskPerformer).start();
-                        } else {
-                            errorMsg.setText("Any of the Fields cannot be empty");
-                            errorMsg.setForeground(Color.RED);
-                            errorMsg.setToolTipText("Fields should be filled with correct infos");
-                            loginPanel.repaint();
-                            int delay = 4000; // milliseconds
-                            ActionListener taskPerformer = new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent evt) {
-                                    errorMsg.setVisible(false);
-                                }
-                            };
-                            new javax.swing.Timer(delay, taskPerformer).start();
-                        }
-                    } else {
-                        errorMsg.setText("Invalid Authentication ! Try Again");
-                        errorMsg.setForeground(Color.RED);
-                        errorMsg.setToolTipText(
-                                "This is an error message. Please input correct username and password to login");
-                        loginPanel.repaint();
-
-                        int delay = 4000; // milliseconds
-                        ActionListener taskPerformer = new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent evt) {
-                                errorMsg.setVisible(false);
-                            }
-                        };
-                        new javax.swing.Timer(delay, taskPerformer).start();
-                    }
+        Connection conn;
+        try {
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306", "root", "");
+            Statement creaStatement = conn.createStatement();
+            creaStatement.executeUpdate("CREATE DATABASE IF NOT EXISTS hager");
+            creaStatement.executeUpdate("USE hager");
+            String allStat = "select * from user";
+            PreparedStatement orgst = conn.prepareStatement(allStat);
+            ResultSet orgsl2=orgst.executeQuery(allStat);
+            boolean Stat = false; 
+            while (orgsl2.next()) {
+                String usrnm = orgsl2.getString("username");
+                String passwd = orgsl2.getString("password");
+                if (username.equals(usrnm) && password.equals(passwd)) {
+                    welcomeMsg();
+                    Stat = true;
+                    Home.frame.getContentPane().removeAll();
+                    Home.frame.repaint();
+                    //Console log:
+                    System.out.println("Authentication Successful\n\n");
+                    new ContCent(); // creating the control center
+                    Home.frame.validate();
+                    break;
+                } 
+                else{
+                    Stat = false;
                 }
             }
-            // else{
-            // JOptionPane.showConfirmDialog(Home.frame, "Fatal Error ! Something went
-            // wrong", "Unknown Error", JOptionPane.ERROR_MESSAGE);
-            // }
+            if(!Stat){
+                JOptionPane.showMessageDialog(Home.frame, "Account not found ! Please recheck your Username and password");
+            }
+      
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-        // if (username.equals(registeredUsernames.get(0)) &&
+       // if (username.equals(registeredUsernames.get(0)) &&
         // password.equals(registeredPasswords.get(0))) {
         // welcomeMsg();
         // }
