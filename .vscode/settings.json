@@ -1,9 +1,13 @@
 {
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
+<<<<<<< HEAD
         "c:\\Program Files\\Java\\jdk-18.0.1.1\\mysql-connector-java-8.0.29.jar",
         "c:\\Program Files\\Java\\jdk-18.0.1.1\\protobuf-java-3.19.4.jar",
         "mysql-connector-java-8.0.29.jar",
         "protobuf-java-3.19.4.jar"
+=======
+        "c:\\Program Files\\Java\\jdk1.7.0_40\\mysql-connector-java-8.0.29.jar"
+>>>>>>> 1b25c074d5179bb0e64e673d840b0c8d8c690f0a
     ]
 }
